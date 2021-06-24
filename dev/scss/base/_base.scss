@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Spartan', sans-serif;
+}
+
+header {
+  height: 150px;
+  background-image: url(../assets/images/bg-header-mobile.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--dark-cyan);
+}
+
+main {
+  position: relative;
+  background-color: var(--bg-color);
+  padding: 6rem 1em;
+}

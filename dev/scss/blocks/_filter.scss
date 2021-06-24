@@ -1,0 +1,20 @@
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: absolute;
+  top: -25px;
+  width: 90%;
+  min-height: 50px;
+  padding: 0 1em;
+  border-radius: 5px;
+  background-color: #fff;
+  color: var(--dark-grayish-cyan);
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  &__clear {
+    position: absolute;
+    right: 20px;
+  }
+}

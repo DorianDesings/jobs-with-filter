@@ -1,0 +1,12 @@
+mixin article(title, text, img, direction='right')
+  article.article
+    if direction === 'right'
+      .article__info
+        h2.article__title= title
+        p.article__text= text
+      img(src= `assets/images/${img}.svg`, alt= img).article__img
+    else 
+      img(src= `assets/images/${img}.svg`, alt= img).article__img
+      .article__info
+        h2.article__title= title
+        p.article__text= text
