@@ -7,6 +7,7 @@ const drawCardsInDOM = data => {
   for (cardData of data) {
     const card = document.createElement('div');
     card.classList.add('card');
+    card.dataset.languages = cardData.languages;
     // START CARD HEADER
     const cardHeader = document.createElement('div');
     cardHeader.classList.add('card__header');
@@ -111,22 +112,24 @@ const createTag = title => {
 };
 
 const checkCards = () => {
-  const allTagsInCards = [...document.querySelectorAll('.tag')].filter(
-    tagElement => !tagElement.classList.contains('tag--with-close')
-  );
-  allTagsInCards.forEach(tag => {
-    tag.parentElement.parentElement.classList.remove('card--hide');
-    if (!tagsInFilter.includes(tag.textContent.trim().toLowerCase())) {
-      tag.parentElement.parentElement.classList.add('card--hide');
-    }
-  });
+  const allCards = [...document.querySelectorAll('.card')];
+  allCards.forEach(card => card.classList.add('card--hide'));
+
+  for (card of allCards) {
+    const languages = card.dataset.languages.split(',');
+
+    const validation = tagsInFilter.every(language =>
+      languages.includes(language)
+    );
+    validation && card.classList.remove('card--hide');
+  }
 };
 
 main.addEventListener('click', e => {
   if (e.target.classList.contains('tag')) {
     const tagInUse = tagsInFilter.find(tag => e.target.textContent === tag);
     if (tagInUse === undefined) {
-      tagsInFilter.push(e.target.textContent.trim().toLowerCase());
+      tagsInFilter.push(e.target.textContent.trim());
       createTag(e.target.textContent);
       checkCards();
     }
