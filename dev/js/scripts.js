@@ -1,6 +1,6 @@
 const main = document.getElementById('main');
 const filter = document.getElementById('filter');
-const tagsInFilter = [];
+let tagsInFilter = [];
 
 const drawCardsInDOM = data => {
   const fragment = document.createDocumentFragment();
@@ -121,8 +121,15 @@ const checkCards = () => {
     const validation = tagsInFilter.every(language =>
       languages.includes(language)
     );
+
     validation && card.classList.remove('card--hide');
   }
+};
+
+const removeTags = () => {
+  const allFilterTags = [...document.querySelectorAll('.tag--with-close')];
+
+  allFilterTags.forEach(tag => tag.remove());
 };
 
 main.addEventListener('click', e => {
@@ -134,4 +141,17 @@ main.addEventListener('click', e => {
       checkCards();
     }
   }
+});
+
+filter.addEventListener('click', e => {
+  if (e.target.classList.contains('filter__clear')) {
+    tagsInFilter.length = 0;
+    removeTags();
+  } else if (e.target.classList.contains('tag__close')) {
+    e.target.parentElement.remove();
+    tagsInFilter = tagsInFilter.filter(
+      tag => tag !== e.target.parentElement.textContent
+    );
+  }
+  checkCards();
 });
